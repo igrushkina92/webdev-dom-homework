@@ -36,12 +36,12 @@
     const comments = [
       {
         name: "Глеб Фокин",
-        date: new Date,
+        date: new Date (),
         text: "Это будет первый комментарий на этой странице"
       },
       {
         name: "Варвара Н.",
-        date: new Date,
+        date: new Date (),
         text: "Мне нравится как оформлена эта страница! ❤"
       },
     ];
@@ -73,7 +73,7 @@
         .join("");
     };
 
-    
+
     renderComments ();
 
     const button = document.getElementById("add")
@@ -81,6 +81,20 @@
     const text = document.getElementById("comment");
 
     button.addEventListener("click", () => {
+      name.classList.remove("error");
+      text.classList.remove("error");
+
+
+      if (name.value === "") {
+        name.classList.add("error");
+        return;
+      }
+
+      if (text.value === "") {
+        text.classList.add("error");
+        return;
+      }
+
       const newComment = {
         name: name.value,
         date: new Date(),
