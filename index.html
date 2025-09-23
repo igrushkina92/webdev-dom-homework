@@ -37,12 +37,12 @@
       {
         name: "Глеб Фокин",
         date: new Date (),
-        text: "Это будет первый комментарий на этой странице"
+        text: "Это будет первый комментарий на этой странице",
       },
       {
         name: "Варвара Н.",
         date: new Date (),
-        text: "Мне нравится как оформлена эта страница! ❤"
+        text: "Мне нравится как оформлена эта страница! ❤",
       },
     ];
 
@@ -63,7 +63,7 @@
           </div>
           <div class="comment-footer">
             <div class="likes">
-              <span class="likes-counter">3</span>
+              <span class="likes-counter">0</span>
               <button class="like-button"></button>
             </div>
           </div>
@@ -99,7 +99,8 @@
         name: name.value,
         date: new Date(),
         text: text.value,
-      };
+        
+      }
 
       comments.push (newComment);
 
