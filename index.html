@@ -33,6 +33,12 @@
   <script>
     "use strict";
 
+    // const name = document.getElementById ("name-input");
+
+    const sanitazeHtml = (value) => {
+      return value.replaceAll(">", "&gt").replaceAll("<", "	&lt")
+    }
+
     const comments = [
       {
         name: "Глеб Фокин",
@@ -127,9 +133,9 @@
       }
 
       const newComment = {
-        name: name.value,
+        name: sanitazeHtml(name.value),
         date: new Date(),
-        text: text.value,
+        text: sanitazeHtml(text.value),
         likes: 0,
         isLiked: false,
         
