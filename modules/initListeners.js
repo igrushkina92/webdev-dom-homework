@@ -46,20 +46,20 @@ export const initAddCommentListener = (renderComments) => {
     text.classList.remove("error");
 
 
-    if (name.value === "") {
+    if (name.value.trim() === "") {
       name.classList.add("error");
       return;
     }
 
-    if (text.value === "") {
+    if (text.value.trim() === "") {
       text.classList.add("error");
       return;
     }
 
     const newComment = {
-      name: sanitizeHtml(name.value),
+      name: sanitizeHtml(name.value.trim()),
       date: new Date(),
-      text: sanitizeHtml(text.value),
+      text: sanitizeHtml(text.value.trim()),
       likes: 0,
       isLiked: false,
       
