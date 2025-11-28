@@ -1,5 +1,6 @@
-import { comments } from "./comments.js";
+import { comments, updateComments } from "./comments.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
+import { postComment } from "./api.js";
 
 export const initLikeListeners = (renderComments) => {
     const likeButtons = document.querySelectorAll(".like-button");
@@ -56,21 +57,14 @@ export const initAddCommentListener = (renderComments) => {
       return;
     }
 
-    const newComment = {
-      name: sanitizeHtml(name.value.trim()),
-      date: new Date(),
-      text: sanitizeHtml(text.value.trim()),
-      likes: 0,
-      isLiked: false,
-      
-    }
 
-    comments.push (newComment);
-
-    renderComments();
-
-    name.value = "";
-    text.value = "";
-
+    postComment(sanitizeHtml(text.value), sanitizeHtml(name.value)).then(
+      (data) => {
+        updateComments(data)
+        renderComments()
+          name.value = "";
+          text.value = "";
+      }
+    )
   });
 }
