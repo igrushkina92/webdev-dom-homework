@@ -3,6 +3,12 @@ const host =  'https://wedev-api.sky.pro/api/v1/a-shcherbakova'
 export const fetchComments = () => {
         return fetch(host + '/comments')
                 .then((res) => {
+                        if (res.status === 500) {
+                                throw new Error('Ошибка сервера');
+                        }
+                        if (!res.ok) {
+                                throw new Error('Не удалось загрузить комментарии');
+                        }
                         return res.json()
                 })
                 .then((responseData) => {
@@ -27,6 +33,22 @@ export const postComment = (text, name) => {
                         text, 
                         name
                 })
+        })
+        .then((response) => {
+                
+                if (response.status === 500) {
+                        throw new Error ('Ошибка сервера')
+                }
+
+                if (response.status === 400) {
+                        throw new Error ('Неверный запрос')
+                }
+
+                if (response.status === 201) {
+                        return response.json()
+                }
+
+
         })
         .then(() => {
                 return fetchComments()
